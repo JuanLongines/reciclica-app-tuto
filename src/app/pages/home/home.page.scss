@@ -5,9 +5,10 @@ ion-list{
     font-weight: bold;
   }
 }
-ion-card{
-  ion-card-subtitle{
-    text-transform: uppercase;
-    font-weight: bold;
-  }
+ion-card-subtitle{
+  text-transform: uppercase;
+  font-weight: bold;
+}
+ion-toolbar{
+  background: var(--ion-color-success) !important;
 }

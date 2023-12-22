@@ -3,22 +3,20 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { addIcons } from 'ionicons';
-import {hourglassOutline} from 'ionicons/icons';
-
+import { hourglassOutline, add } from 'ionicons/icons';
+import { PickupCallCardComponent } from 'src/app/components/pickup-call-card/pickup-call-card.component';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.page.html',
   styleUrls: ['./home.page.scss'],
   standalone: true,
-  imports: [IonicModule, CommonModule, FormsModule]
+  imports: [IonicModule, CommonModule, FormsModule,PickupCallCardComponent],
 })
 export class HomePage implements OnInit {
-
-  constructor() { addIcons({hourglassOutline});
-}
-
-  ngOnInit() {
+  constructor() {
+    addIcons({ hourglassOutline, add});
   }
 
+  ngOnInit() {}
 }

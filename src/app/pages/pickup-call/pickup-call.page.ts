@@ -2,23 +2,19 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
-import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-loader',
-  templateUrl: './loader.page.html',
-  styleUrls: ['./loader.page.scss'],
+  selector: 'app-pickup-call',
+  templateUrl: './pickup-call.page.html',
+  styleUrls: ['./pickup-call.page.scss'],
   standalone: true,
   imports: [IonicModule, CommonModule, FormsModule]
 })
-export class LoaderPage implements OnInit {
+export class PickupCallPage implements OnInit {
 
-  constructor(private router:Router) { }
+  constructor() { }
 
   ngOnInit() {
-    setTimeout(()=>{
-      this.router.navigate(['login']);
-    },1000);
   }
 
 }

@@ -24,4 +24,12 @@ export const routes: Routes = [
     path: 'home',
     loadComponent: () => import('./pages/home/home.page').then( m => m.HomePage)
   },
+  {
+    path: 'pickup-call',
+    loadComponent: () => import('./pages/pickup-call/pickup-call.page').then( m => m.PickupCallPage)
+  },
+  {
+    path: 'pickup-calls',
+    loadComponent: () => import('./pages/pickup-calls/pickup-calls.page').then( m => m.PickupCallsPage)
+  },
 ];
