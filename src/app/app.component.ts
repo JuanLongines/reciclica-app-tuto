@@ -32,6 +32,7 @@ import {
   bookmarkOutline,
   bookmarkSharp,
 } from 'ionicons/icons';
+import { LoadingComponent } from './components/loading/loading.component';
 
 @Component({
   selector: 'app-root',
@@ -54,6 +55,7 @@ import {
     IonIcon,
     IonLabel,
     IonRouterOutlet,
+    LoadingComponent
   ],
 })
 export class AppComponent {
