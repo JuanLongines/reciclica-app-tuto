@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable} from 'rxjs';
+import { Observable, catchError, from, mergeMap, switchMap, throwError} from 'rxjs';
 import {User} from "../../model/user";
 import {AngularFireAuth} from "@angular/fire/compat/auth";
 import { getAuth } from "firebase/auth";
@@ -13,24 +13,26 @@ export class AuthService {
 
   constructor(private auth:AngularFireAuth) { }
 
-  recoverEmailPassword(email:string):Observable<void>{
-    const actionCodeSettings: any = {
-      url: 'http://www.example.com/resetPassword', // La URL a la que quieres redirigir al usuario.
-      handleCodeInApp: true, // Indica que quieres manejar el código en la aplicación.
-    };
-   // const authtt=getAuth(initializeApp(environment.firebaseConfig));
-    return new Observable<void>(observer=>{
-     this.auth.sendPasswordResetEmail(email)
-     .then(()=>{
-      observer.next();
-      observer.complete();
-     })
-     .catch((error)=>{
-      const errorr=this.processErrorCode(error);
-      observer.error(errorr);
-      observer.complete();
-    })
-    });
+  recoverEmailPassword(email: string): Observable<void> {
+    return from(this.auth.fetchSignInMethodsForEmail(email)).pipe(
+      mergeMap((signInMethods) => {
+        if (signInMethods.length > 0) {
+          // El correo está registrado, intenta restablecer la contraseña
+          return from(this.auth.sendPasswordResetEmail(email)).pipe(
+            catchError((error) => {
+              const errorCode = this.processErrorCode(error);
+              return throwError(errorCode);
+            })
+          );
+        } else {
+          // El correo no está registrado
+          return throwError({message:'User not found. No user corresponding to the email address.'});
+        }
+      }),
+      catchError((error) => {
+        return throwError(error); 
+      })
+    );
   }
 
   login(email:string, password:string):Observable<User> {

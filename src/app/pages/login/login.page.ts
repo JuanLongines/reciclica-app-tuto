@@ -96,7 +96,11 @@ export class LoginPage implements OnInit,OnDestroy {
       this.authService.recoverEmailPassword(email).subscribe(()=>{
         this.store.dispatch(recoverPasswordSuccess());
       },error=>{
-        this.store.dispatch(recoverPasswordFail({error}));
+        setTimeout(
+          ()=>{
+            this.store.dispatch(recoverPasswordFail({error}));
+          }
+          ,1000);
       });
     }
   }
