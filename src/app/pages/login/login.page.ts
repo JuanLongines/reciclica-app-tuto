@@ -96,7 +96,6 @@ export class LoginPage implements OnInit,OnDestroy {
       this.authService.recoverEmailPassword(email).subscribe(()=>{
         this.store.dispatch(recoverPasswordSuccess());
       },error=>{
-        console.log('isRecoveringPassword',error);
         this.store.dispatch(recoverPasswordFail({error}));
       });
     }
