@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 export class LoginPageForm{
 
   private formBuilder:FormBuilder;
-  
+
   constructor(formBuilder:FormBuilder){
     this.formBuilder=formBuilder;
 
@@ -11,7 +11,7 @@ export class LoginPageForm{
   createForm():FormGroup{
     return this.formBuilder.group({
       email:['',[Validators.required,Validators.email]],
-      password:['',[Validators.required]],
+      password:['',[Validators.required,Validators.minLength(6)]],
     });
   }
 }

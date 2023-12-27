@@ -15,11 +15,11 @@ describe('LoginPageForm',()=>{
       loginPageForm=new LoginPageForm(new FormBuilder());
       form=loginPageForm.createForm();
   }));
-  
+
 
 
   it('should create login form empty',()=>{
-   
+
     expect(form).not.toBeNull();
     expect(form.get('email')).not.toBeNull();
     expect(form.get('email')!.value).toEqual("");
@@ -34,6 +34,10 @@ describe('LoginPageForm',()=>{
   it('should have email invalid if email is not valid',()=>{
     form.get('email')?.setValue('invalid email');
     expect(form.get('email')!.valid).toBeFalsy();
+  });
+  it('should have password invalid if password is not valid',()=>{
+    form.get('password')?.setValue('12345');
+    expect(form.get('password')!.valid).toBeFalsy();
   });
 
   it('should have email valid if email is valid',()=>{

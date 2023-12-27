@@ -1,4 +1,4 @@
-import { enableProdMode } from '@angular/core';
+import {enableProdMode, importProvidersFrom} from '@angular/core';
 import { bootstrapApplication } from '@angular/platform-browser';
 import { RouteReuseStrategy, provideRouter } from '@angular/router';
 import { IonicRouteStrategy, provideIonicAngular } from '@ionic/angular/standalone';
@@ -10,7 +10,10 @@ import { routes } from './app/app.routes';
 import { environment } from './environments/environment';
 import { loadingFeature } from './app/store/loading/loading.reducers';
 import { loginFeature } from './app/store/login/login.reducers';
- 
+import {AngularFireModule} from "@angular/fire/compat";
+import { getApp } from 'firebase/app';
+import { AngularFireAuthModule } from '@angular/fire/compat/auth';
+
 if (environment.production) {
   enableProdMode();
 }
@@ -23,6 +26,10 @@ bootstrapApplication(AppComponent, {
     provideStore(),
     provideState(loadingFeature),
     provideState(loginFeature),
+    importProvidersFrom([
+      AngularFireModule.initializeApp(environment.firebaseConfig),
+      AngularFireAuthModule
+    ]),
     provideStoreDevtools({
       maxAge: 25
     })
